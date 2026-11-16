@@ -64,24 +64,18 @@ if uploaded is not None:
         conf = np.max(pred) * 100
         predicted_class = class_names[idx]
 
-        if conf < 70:
-            st.warning("⚠️ Out of Scope!")
-            st.write("This leaf no be cassava or plantain leaf wey I sabi.")
-            st.write("Please upload a clear cassava or plantain leaf picture.")
-            st.info(f"Confidence: {conf:.2f}% - Too low to trust")
-        else:
-            st.success(f"Prediction: **{predicted_class}**")
-            st.info(f"Confidence: {conf:.2f}%")
-            st.bar_chart(pred[0])
-            info = disease_info.get(predicted_class)
-            if info:
-                st.markdown("---")
-                st.subheader(f"🩺 Diagnosis: {predicted_class}")
-                st.write(f"**Wetin cause am:** {info['cause']}")
-                st.subheader("✅ Wetin you go do (Solution):")
-                st.write(info['solution'])
-                st.subheader("🛡️ How to prevent am next time:")
-                st.write(info['prevention'])
+        st.success(f"Prediction: **{predicted_class}**")
+        st.info(f"Confidence: {conf:.2f}%")
+        st.bar_chart(pred[0])
+        info = disease_info.get(predicted_class)
+        if info:
+            st.markdown("---")
+            st.subheader(f"🩺 Diagnosis: {predicted_class}")
+            st.write(f"**Wetin cause am:** {info['cause']}")
+            st.subheader("✅ Wetin you go do (Solution):")
+            st.write(info['solution'])
+            st.subheader("🛡️ How to prevent am next time:")
+            st.write(info['prevention'])
 
 st.markdown("---")
 st.write("Built with Streamlit | Model: model.h5")
